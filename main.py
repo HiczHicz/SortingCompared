@@ -115,11 +115,11 @@ for list in l:
     list_bs = list[:]
     lpq=quickSort(list_qs, 0, len(list_qs) - 1)
     lph=heapSort(list_hs)
-    lpi = quickSort(list_qs, 0, len(list_qs) - 1)
-    lpb = heapSort(list_hs)
+    lpi = insertionSort(list_is)
+    lpb = bubbleSort(list_bs)
     wyniki.append([n,lpq,lph,lpi,lpb])
 
 with open('porownania.csv', 'w', newline='') as f:
     writer = csv.writer(f,delimiter=';')
-    writer.writerow(['Length','Quick','Heap','Insertion','Bubble'])
+    writer.writerow(['Length','Quick Sort','Heap Sort','Insertion Sort','Bubble Sort'])
     writer.writerows(wyniki)
