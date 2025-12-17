@@ -26,6 +26,9 @@ def insertionSort(list):
     return licznik
 
 #..........................QUICK SORT...........................#
+import sys
+sys.setrecursionlimit(10**6) #zwiększenie limitu - na macbooku działa inaczej niż na windows, stąd konieczność tego importu
+
 def partition(list, low, high):
     pivot = list[high]
     i = low - 1
@@ -41,7 +44,7 @@ def partition(list, low, high):
 def quickSort(list, low, high):
     lpq=0
     if low < high:
-        p , lpq1 = partition(list, low, high)
+        p, lpq1 = partition(list, low, high)
         lpq += lpq1
         lpq2 = quickSort(list, low, p - 1)
         lpq3 = quickSort(list, p + 1, high)
@@ -103,7 +106,6 @@ for n in range(10, 1000 + 1, 10):
     lista = [random() for _ in range(n)]
     l.append((lista))
 
-
 wyniki=[]
 for list in l:
     n=len(list)
@@ -111,16 +113,12 @@ for list in l:
     list_hs = list[:]
     list_is = list[:]
     list_bs = list[:]
-    print("lista")
-    print(len(list))
-    lpq=quicksort.quick_sort(list_qs, 0, len(list_qs) - 1)
-    lph=heapsort.heap_sort(list_hs)
-    #lpi = insertion.quick_sort(list_qs, 0, len(list_qs) - 1)
-    #lpb = bubblesort.heap_sort(list_hs)
+    lpq=quickSort(list_qs, 0, len(list_qs) - 1)
+    lph=heapSort(list_hs)
+    lpi = quickSort(list_qs, 0, len(list_qs) - 1)
+    lpb = heapSort(list_hs)
     wyniki.append([n,lpq,lph,lpi,lpb])
 
-
-print(wyniki)
 with open('porownania.csv', 'w', newline='') as f:
     writer = csv.writer(f,delimiter=';')
     writer.writerow(['Length','Quick','Heap','Insertion','Bubble'])
